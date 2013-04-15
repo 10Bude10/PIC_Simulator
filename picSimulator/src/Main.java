@@ -11,6 +11,9 @@ public class Main {
 	public static void main(String[] args){
 
 		Canvas  ui = new Canvas();
+		DateiEinlesen datei= new DateiEinlesen();
+		datei.setDatei("BA_Test.LST");
+		datei.zeigeDatei();
 		
 	
 	}
