@@ -1,6 +1,5 @@
-package simulator;
+package simulator.dateiZugriff;
 import java.io.*;
-import java.util.Iterator;
 import java.util.TreeMap;
 
 public class DateiEinlesen {
@@ -10,7 +9,7 @@ public class DateiEinlesen {
 	String meineTextZeile=""; // spätere ausgabe
 	String dateiTextZeile="";//text der datei
 	String dateiName; //der name der datei
-	TreeMap<Integer, String> befehl = new TreeMap<Integer, String>();
+	TreeMap<Integer, Befehl> befehlTree = new TreeMap<Integer, Befehl>();
 	
 	
 	public void setDatei(String name){ // legt fest wo die datei liegt
@@ -32,14 +31,24 @@ public class DateiEinlesen {
 //			 	meineTextZeile= meineTextZeile+zeilenLaenge+ "\t| "; // zeile die ausgegeben wird (länge)
 //				meineTextZeile= meineTextZeile+dateiTextZeile; // zeile die ausgegeben wird (text)
 //				System.out.println(meineTextZeile);// gibt die eig textzeile aus mit alles was man haben will
-				befehl.put(zeilenNummer, dateiTextZeile);
+			
+				//würde nur text ohne befehle speichern
+//				if (dateiTextZeile.charAt(0) == ' ') {
+//					befehl.put(zeilenNummer, dateiTextZeile.substring(27));
+//				} 
+				
+				//speichert speicherort und speicherstelle im internen speicher
+				if (dateiTextZeile.charAt(0) != ' ') {
+				befehlTree.put(zeilenNummer, new Befehl(1, 2));
+				}
+				
 				meineTextZeile=""; // text zeile wird wieder geleert
 				dateiTextZeile= meinLeseStream.readLine();//die textzeile der datei ließt die nächste zeile
 				
 			}
 			
-			for (Integer elem : befehl.keySet())
-				System.out.println(elem + " - " + befehl.get(elem));
+			for (Integer elem : befehlTree.keySet())
+				System.out.println(elem + " - " + befehlTree.get(elem).getSpeicherstelle());
 
 
 			
