@@ -18,7 +18,7 @@ public class ImageButton extends AbstractButton {
 	  private Image scaledImgMO;
 	  
 	  /*
-	   *  Customized Icon
+	   *  Customized Icon with new functions
 	   */
 	  public ImageButton(String imagePath, String imageMOPath, int widthImg, int heightImg) {
 		  this.width = widthImg;
