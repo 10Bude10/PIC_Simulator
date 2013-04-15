@@ -19,7 +19,7 @@ public class ImageButton extends AbstractButton {
 	  
 	  /*
 	   *  Customized Icon
-	   */
+	   *///jb
 	  public ImageButton(String imagePath, String imageMOPath, int widthImg, int heightImg) {
 		  this.width = widthImg;
 		  this.height = heightImg;
