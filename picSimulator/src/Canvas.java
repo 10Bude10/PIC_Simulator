@@ -4,12 +4,16 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.SystemColor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
+import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -50,8 +54,10 @@ public class Canvas extends JFrame {
 		getContentPane().setLayout(gridBagLayout);
 		
 
-		ImageButton insert = new ImageButton("insertCode.png", "insertCodeMO.png", 50, 50);
+		ImageButton insert = new ImageButton("insertCode.png", "insertCodeMO.png", 60, 60);
 		add(insert);
+		
+		
 		GridBagConstraints gbc_insertBtn = new GridBagConstraints();
 		gbc_insertBtn.gridwidth = 1;
 		gbc_insertBtn.gridheight = 1;

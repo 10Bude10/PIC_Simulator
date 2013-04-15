@@ -23,13 +23,22 @@ public class ImageButton extends AbstractButton {
 	  public ImageButton(String imagePath, String imageMOPath, int widthImg, int heightImg) {
 		  this.width = widthImg;
 		  this.height = heightImg;
-		
+		 	
 		  try {  
 			  img = ImageIO.read(ClassLoader.getSystemResource(imagePath));
 			  imgMO = ImageIO.read(ClassLoader.getSystemResource(imageMOPath));
 		  } catch(Exception e) {
 			  e.getMessage();
-		  } if((img != null) && (imgMO != null)) {
+		  }
+		  setPreferredSize(new Dimension(width, height));  
+		  setIcon(new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+		  setRolloverEnabled(true);
+		  setRolloverIcon(new ImageIcon(imgMO.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+		  
+		  
+			  
+			  
+			  /*		   if((img != null) && (imgMO != null)) {
 			  setPreferredSize(new Dimension(width, height));  
 			  scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 			  scaledImgMO = imgMO.getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -45,6 +54,6 @@ public class ImageButton extends AbstractButton {
 		  if(true) {
 			  g.drawImage(scaledImgMO, 0, 0, width, height, null);
 		  }
-	  }
+*/	  }
 
 }
