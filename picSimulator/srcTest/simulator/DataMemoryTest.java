@@ -1,7 +1,6 @@
 package simulator;
 
 import static org.junit.Assert.*;
-import DataMemory;
 
 import org.junit.Test;
 
