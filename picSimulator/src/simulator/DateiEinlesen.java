@@ -32,17 +32,14 @@ public class DateiEinlesen {
 //			 	meineTextZeile= meineTextZeile+zeilenLaenge+ "\t| "; // zeile die ausgegeben wird (l‰nge)
 //				meineTextZeile= meineTextZeile+dateiTextZeile; // zeile die ausgegeben wird (text)
 //				System.out.println(meineTextZeile);// gibt die eig textzeile aus mit alles was man haben will
-				befehl.put(zeilenNummer, meineTextZeile);
+				befehl.put(zeilenNummer, dateiTextZeile);
 				meineTextZeile=""; // text zeile wird wieder geleert
 				dateiTextZeile= meinLeseStream.readLine();//die textzeile der datei lieﬂt die n‰chste zeile
 				
 			}
 			
-			Iterator<befehl.Entry<String, Integer> > it = befehl.entrySet().iterator();
-	        while(it.hasNext()){
-	        	befehl.Entry en = it.next();
-	            System.out.println("Name: \"" + en.getKey() + "\" ist \"" + en.getValue() + "\" Jahr alt!");
-	        }
+			for (Integer elem : befehl.keySet())
+				System.out.println(elem + " - " + befehl.get(elem));
 
 
 			
