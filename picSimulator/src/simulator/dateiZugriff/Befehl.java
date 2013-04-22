@@ -2,29 +2,25 @@ package simulator.dateiZugriff;
 
 public class Befehl {
 	private int Code;
-	private int Speicherstelle;
+	private int Programmzeile;
 	
-	public Befehl(int befehl, int speicherst){
-	Code =befehl; 
-	Speicherstelle= speicherst;
+	public Befehl(int codeX, int progX){
+		Code= codeX;
+		Programmzeile= progX;
 	}
-
+	
 	public int getCode() {
 		return Code;
 	}
-
 	public void setCode(int code) {
 		Code = code;
 	}
-
-	public int getSpeicherstelle() {
-		return Speicherstelle;
+	public int getProgrammzeile() {
+		return Programmzeile;
 	}
-
-	public void setSpeicherstelle(int speicherstelle) {
-		Speicherstelle = speicherstelle;
+	public void setProgrammzeile(int programmzeile) {
+		Programmzeile = programmzeile;
 	}
-	
 	
 	
 }

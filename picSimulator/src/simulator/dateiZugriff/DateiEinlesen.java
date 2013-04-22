@@ -10,7 +10,7 @@ public class DateiEinlesen {
 	String dateiTextZeile="";//text der datei
 	String dateiName; //der name der datei
 	TreeMap<Integer, Befehl> befehlTree = new TreeMap<Integer, Befehl>();
-	
+	TreeMap<Integer, String> textTree = new TreeMap<Integer, String>();
 	
 	public void setDatei(String name){ // legt fest wo die datei liegt
 		dateiName= name;
@@ -33,13 +33,13 @@ public class DateiEinlesen {
 //				System.out.println(meineTextZeile);// gibt die eig textzeile aus mit alles was man haben will
 			
 				//würde nur text ohne befehle speichern
-//				if (dateiTextZeile.charAt(0) == ' ') {
-//					befehl.put(zeilenNummer, dateiTextZeile.substring(27));
-//				} 
 				
-				//speichert speicherort und speicherstelle im internen speicher
+				textTree.put(zeilenNummer, dateiTextZeile.substring(27));
+				
+				
+				//speichert: Identifier: speicherst. und in Befehlsklasse: befehl und Zeilennr
 				if (dateiTextZeile.charAt(0) != ' ') {
-				befehlTree.put(zeilenNummer, new Befehl(1, 2));
+				befehlTree.put(Integer.parseInt(dateiTextZeile.substring(0, 4), 16), new Befehl(Integer.parseInt(dateiTextZeile.substring(5, 9), 16), zeilenNummer));
 				}
 				
 				meineTextZeile=""; // text zeile wird wieder geleert
@@ -47,8 +47,12 @@ public class DateiEinlesen {
 				
 			}
 			
-			for (Integer elem : befehlTree.keySet())
-				System.out.println(elem + " - " + befehlTree.get(elem).getSpeicherstelle());
+			//AUSGABE
+//			for (Integer elem : befehlTree.keySet())
+//				System.out.println(elem + " - " + befehlTree.get(elem).getCode()+ " - " +befehlTree.get(elem).getProgrammzeile());
+//
+//			for (Integer elem : textTree.keySet())
+//				System.out.println(elem + " - " + textTree.get(elem));
 
 
 			
