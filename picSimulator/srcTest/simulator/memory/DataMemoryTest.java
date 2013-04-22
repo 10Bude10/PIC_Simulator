@@ -1,10 +1,12 @@
-package simulator;
+package simulator.memory;
 
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Member;
 
 import org.junit.Test;
+
+import simulator.memory.DataMemory;
 
 public class DataMemoryTest {
 

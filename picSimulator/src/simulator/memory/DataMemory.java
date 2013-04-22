@@ -1,4 +1,4 @@
-package simulator;
+package simulator.memory;
 
 public class DataMemory {
 
