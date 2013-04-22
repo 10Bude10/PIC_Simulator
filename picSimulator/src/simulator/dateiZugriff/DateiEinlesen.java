@@ -15,7 +15,7 @@ public class DateiEinlesen {
 	public void setDatei(String name){ // legt fest wo die datei liegt
 		dateiName= name;
 	}
-	public void zeigeDatei(){
+	public void berechneDatei(){
 		FileReader meinFile= null;
 		BufferedReader meinLeseStream= null;
 		
@@ -58,11 +58,23 @@ public class DateiEinlesen {
 			
 			meinLeseStream.close(); //schlieﬂt den lesetream
 			meinFile.close(); //schlieﬂt die datei
-			System.out.println("################### ende der datei #######################");
+//			System.out.println("################### ende der datei #######################");
 		}catch(IOException e){
 			System.out.println("Fehler beim Dateizugriff" +e);
 		}
 		
+	}
+	public TreeMap<Integer, Befehl> getBefehlTree() {
+		return befehlTree;
+	}
+	public void setBefehlTree(TreeMap<Integer, Befehl> befehlTree) {
+		this.befehlTree = befehlTree;
+	}
+	public TreeMap<Integer, String> getTextTree() {
+		return textTree;
+	}
+	public void setTextTree(TreeMap<Integer, String> textTree) {
+		this.textTree = textTree;
 	}
 
 }
