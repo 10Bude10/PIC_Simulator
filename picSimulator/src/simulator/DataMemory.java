@@ -1,4 +1,5 @@
 package simulator;
+
 public class DataMemory {
 
 	int[] memory;
@@ -7,11 +8,12 @@ public class DataMemory {
 
 	public DataMemory() {
 
-		memory = new int[0xFF];// Int-Array mit der Größe FF
+		// Int-Array mit der Größe FF
+		memory = new int[0xFF];
 		this.initMemory();
 
 	}
-	
+
 	public void initMemory() {
 
 		// Kompletter Speicherbereich mit 0 überschreiben
@@ -38,7 +40,7 @@ public class DataMemory {
 	public int readFileValue(int address) {
 
 		// Wenn Bank 1 aktiv, dann Offset addieren
-		if (!this.bank0Active()) {
+		if (this.checkBank()) {
 			address = address + addressOffset;
 		}
 		return memory[address];
@@ -47,6 +49,8 @@ public class DataMemory {
 	// Komplette 8 Bit in Register an Addresse schreiben
 	public void writeFileValue(int address, int value) {
 
+		
+		
 		// Wird immer zuerst in bank 0 geschrieben und anschließend nach Bank 1
 		// gespiegelt
 
@@ -74,6 +78,11 @@ public class DataMemory {
 			memory[tmpAddress] = value;
 			memory[(tmpAddress | 0b10000000)] = value;
 		default:
+			
+			if (this.checkBank()) {
+				address = address + addressOffset;
+			}
+			
 			memory[address] = value;
 			break;
 		}
@@ -82,6 +91,11 @@ public class DataMemory {
 
 	// Bit an der Adresse lesen
 	public int readBitValue(int address, int position) {
+
+		// Wenn Bank 1 aktiv, dann Offset addieren
+		if (this.checkBank()) {
+			address = address + addressOffset;
+		}
 
 		// Nach rechts shiften, bis gewünschtes Bit hinten steht, dann Rest
 		// ausblenden
@@ -115,22 +129,19 @@ public class DataMemory {
 		case 2:
 			if (value == 1) {
 				memory[tmpAddress] = memory[tmpAddress] | mask;
-				memory[(tmpAddress | 0b10000000)] = memory[(tmpAddress | 0b10000000)]
-						| mask;
+				memory[(tmpAddress | 0b10000000)] = memory[(tmpAddress | 0b10000000)]| mask;
 			}
 
 			else {
 				mask = ~mask;
 				memory[tmpAddress] = memory[tmpAddress] & mask;
-				memory[(tmpAddress | 0b10000000)] = memory[(tmpAddress | 0b10000000)]
-						& mask;
+				memory[(tmpAddress | 0b10000000)] = memory[(tmpAddress | 0b10000000)]& mask;
 			}
 			break;
 		case 3:
 			if (value == 1) {
 				memory[tmpAddress] = memory[tmpAddress] | mask;
-				memory[(tmpAddress | 0b10000000)] = memory[(tmpAddress | 0b10000000)]
-						| mask;
+				memory[(tmpAddress | 0b10000000)] = memory[(tmpAddress | 0b10000000)]| mask;
 			}
 
 			else {
@@ -183,6 +194,11 @@ public class DataMemory {
 			}
 			break;
 		default:
+			// Wenn Bank 1 aktiv, dann Offset addieren
+			if (this.checkBank()) {
+				address = address + addressOffset;
+			}
+
 			if (value == 1) {
 
 				memory[address] = memory[address] | mask;
@@ -206,35 +222,44 @@ public class DataMemory {
 
 	public void deleteCarryFlag() {
 		// In beiden Statusregistern das Flag löschen
-		this.writeBitValue(03, 0, 0);
-		this.writeBitValue(83, 0, 0);
+		this.writeBitValue(0x03, 0, 0);
+		this.writeBitValue(0x83, 0, 0);
 
 	}
 
 	public void setZeroFlag() {
 		// In beiden Statusregistern das flag setzen
-		this.writeBitValue(03, 2, 1);
-		this.writeBitValue(83, 2, 1);
+		this.writeBitValue(0x03, 2, 1);
+		this.writeBitValue(0x83, 2, 1);
 	}
 
 	public void deleteZeroFlag() {
 		// In beiden Statusregistern das Flag löschen
-		this.writeBitValue(03, 2, 0);
-		this.writeBitValue(83, 2, 0);
+		this.writeBitValue(0x03, 2, 0);
+		this.writeBitValue(0x83, 2, 0);
 	}
 
-	public void activateBank(boolean bank0) {
-
-	}
-
-	public boolean bank0Active() {
-		// Wenn RP0 im Statusregiser 0 ist = Bank 0 wenn 1 dann Bank 1
-		if (this.readBitValue(03, 5) == 0) {
-			return true;
+	// Methode um Bank zu ändern
+	public void activateBank(boolean bank) {
+		// false Bank0
+		// true Bank1
+		if (bank==false) {
+			memory[0x03]=memory[0x03]&0b11011111;
+			memory[0x83]=memory[0x83]&0b11011111;
 		} else {
-			return false;
+			memory[0x03]=memory[0x03]|0b00100000;
+			memory[0x83]=memory[0x83]|0b00100000;
 		}
+	}
 
+	// Methode um Aktive Bank herauszufinden
+	public boolean checkBank() {
+		if((memory[03]&0b00100000)==0b00100000){
+		return true; //RP0 ist 1 --> Bank 1 aktiv	
+		}
+		else {
+			return false; // Bank 0 aktiv
+		}
 	}
 
 }
