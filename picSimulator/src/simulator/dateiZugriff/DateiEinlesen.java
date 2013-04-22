@@ -1,6 +1,5 @@
-package simulator;
+package simulator.dateiZugriff;
 import java.io.*;
-import java.util.Iterator;
 import java.util.TreeMap;
 
 public class DateiEinlesen {
@@ -10,8 +9,8 @@ public class DateiEinlesen {
 	String meineTextZeile=""; // spätere ausgabe
 	String dateiTextZeile="";//text der datei
 	String dateiName; //der name der datei
-	TreeMap<Integer, String> befehl = new TreeMap<Integer, String>();
-	
+	TreeMap<Integer, Befehl> befehlTree = new TreeMap<Integer, Befehl>();
+	TreeMap<Integer, String> textTree = new TreeMap<Integer, String>();
 	
 	public void setDatei(String name){ // legt fest wo die datei liegt
 		dateiName= name;
@@ -32,17 +31,28 @@ public class DateiEinlesen {
 //			 	meineTextZeile= meineTextZeile+zeilenLaenge+ "\t| "; // zeile die ausgegeben wird (länge)
 //				meineTextZeile= meineTextZeile+dateiTextZeile; // zeile die ausgegeben wird (text)
 //				System.out.println(meineTextZeile);// gibt die eig textzeile aus mit alles was man haben will
-				befehl.put(zeilenNummer, meineTextZeile);
+			
+				//würde nur text ohne befehle speichern
+				
+				textTree.put(zeilenNummer, dateiTextZeile.substring(27));
+				
+				
+				//speichert: Identifier: speicherst. und in Befehlsklasse: befehl und Zeilennr
+				if (dateiTextZeile.charAt(0) != ' ') {
+				befehlTree.put(Integer.parseInt(dateiTextZeile.substring(0, 4), 16), new Befehl(Integer.parseInt(dateiTextZeile.substring(5, 9), 16), zeilenNummer));
+				}
+				
 				meineTextZeile=""; // text zeile wird wieder geleert
 				dateiTextZeile= meinLeseStream.readLine();//die textzeile der datei ließt die nächste zeile
 				
 			}
 			
-			Iterator<befehl.Entry<String, Integer> > it = befehl.entrySet().iterator();
-	        while(it.hasNext()){
-	        	befehl.Entry en = it.next();
-	            System.out.println("Name: \"" + en.getKey() + "\" ist \"" + en.getValue() + "\" Jahr alt!");
-	        }
+			//AUSGABE
+//			for (Integer elem : befehlTree.keySet())
+//				System.out.println(elem + " - " + befehlTree.get(elem).getCode()+ " - " +befehlTree.get(elem).getProgrammzeile());
+//
+//			for (Integer elem : textTree.keySet())
+//				System.out.println(elem + " - " + textTree.get(elem));
 
 
 			
