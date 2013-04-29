@@ -21,6 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 public class GUI extends JFrame {
+	// Angabe für LEDs
 	public boolean arrayLED[] = new boolean[8];
 	private JTable table;
 	
