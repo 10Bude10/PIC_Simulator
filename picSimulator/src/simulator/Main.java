@@ -30,9 +30,12 @@ public class Main {
 		befehlTree= datei.getBefehlTree();
 		textTree= datei.getTextTree();
 		
-		for (Integer elem : befehlTree.keySet()){
-			befehl.findeBefehl(befehlTree.get(elem).getCode(), befehlTree);
-		}
+//		for (Integer elem : befehlTree.keySet()){
+//			befehl.findeBefehl(befehlTree.get(elem).getCode(), befehlTree);
+//		}
+		
+		befehl.starteAbarbeitung(befehlTree);
+		
 		
 	
 	}

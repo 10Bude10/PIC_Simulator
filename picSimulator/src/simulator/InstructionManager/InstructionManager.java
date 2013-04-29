@@ -3,20 +3,35 @@ import java.util.BitSet;
 import java.util.TreeMap;
 
 import simulator.dateiZugriff.Befehl;
+import simulator.memory.DataMemory;
 
 public class InstructionManager {
 	static TreeMap<Integer, Befehl> befehlTree = new TreeMap<Integer, Befehl>();
 
 	private int opCode;
+	private int speicherSt;
 	private BitSet opCodeBitSet = new BitSet(14);
+	private DataMemory data= new DataMemory();
+	public int i = 0; 
 	
-	public void findeBefehl(int code, TreeMap befehlBaum) {
+	
+	
+	//List mit allen befehlen -> ruft ausführen aus
+	public void starteAbarbeitung(TreeMap befehlBaum){
+		befehlTree= befehlBaum; 
+		for (i=0; i< befehlTree.size(); i++){
+			befehlTree.get(i);
+			findeBefehl(befehlTree.get(i).getCode());
+			
+			System.out.println(i);
+		}
+	}
+	
+	//sucht einen Befehl und führt ihn aus
+	public void findeBefehl(int code) {
 
-		
 		opCode = code & 0x3FFF;
 		initOpBitSet(opCode);
-		
-		befehlTree= befehlBaum; 
 		
 		if (opCodeBitSet.get(13)) {
 			// 1xxxxxxxxxxxxx
@@ -167,6 +182,9 @@ public class InstructionManager {
 			opCode = opCode >>> 1;
 		}
 	}
+	
+
+
 	
 	
 
