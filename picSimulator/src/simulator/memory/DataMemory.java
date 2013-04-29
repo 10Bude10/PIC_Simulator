@@ -261,5 +261,8 @@ public class DataMemory {
 			return false; // Bank 0 aktiv
 		}
 	}
+	
+	
+	
 
 }

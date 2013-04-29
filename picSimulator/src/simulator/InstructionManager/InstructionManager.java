@@ -157,17 +157,6 @@ public class InstructionManager {
 		}
 	}
 	
-	private void initOpBitSet(int opCode) {
-		opCodeBitSet.clear();
-
-		for (int i = 0; i < 14; i++) {
-			if (opCode % 2 != 0) {
-				opCodeBitSet.set(i);
-			}
-			opCode = opCode >>> 1;
-		}
-	}
-	
 	
 
 }
