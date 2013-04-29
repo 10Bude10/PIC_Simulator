@@ -3,16 +3,20 @@
 	import java.util.TreeMap;
 
 	import simulator.dateiZugriff.Befehl;
-	import simulator.memory.DataMemory;
+import simulator.memory.Akku;
+import simulator.memory.DataMemory;
 
 	public class InstructionManager {
 		static TreeMap<Integer, Befehl> befehlTree = new TreeMap<Integer, Befehl>();
-
+		private DataMemory mem = new DataMemory();
+		private Akku akku= new Akku(mem);
+		
 		private int opCode;
 		private int speicherSt;
 		private BitSet opCodeBitSet = new BitSet(14);
 		private DataMemory data= new DataMemory();
 		public int i = 0; 
+		
 		
 		
 		
@@ -37,7 +41,7 @@
 					// 11xxxxxxxxxxxx
 					switch (opCode >>> 10 & 3) {
 					case 0:
-//						movlw();
+						movlw();
 						return;
 					case 1:
 //						retlw();
@@ -93,7 +97,7 @@
 					switch (opCode >>> 8 & 15) {
 					case 0:
 						if (opCodeBitSet.get(7)) {
-//							movwf();
+							movwf();
 							return;
 						} else {
 							switch (opCode & 15) {
@@ -119,7 +123,7 @@
 						if (opCodeBitSet.get(7)) {
 //							clrf();
 						} else {
-//							clrw();
+							clrw();
 						}
 						return;
 					case 2:
@@ -147,7 +151,7 @@
 //						comf();
 						return;
 					case 10:
-//						incf();
+						incf();
 						return;
 					case 11:
 //						decfsz();
@@ -171,6 +175,8 @@
 		}
 		
 
+		
+
 		private void initOpBitSet(int opCode) {
 			opCodeBitSet.clear();
 
@@ -182,8 +188,38 @@
 			}
 		}
 		
-
-
+		public void movlw(){
+			akku.setAkku((opCode&255));
+		//	System.out.println(akku.getAkku());
+		}
 		
+		private void movwf() {
+			akku.writeToMem((opCode & 127));
+//			System.out.println("Stelle: "+ (opCode & 127)+"   "+ mem.readFileValue((opCode & 127)));
+		}
+		
+		private void clrw(){
+			akku.deleteAkku();
+		}
+		
+		private void incf(){
+			int tmp = opCode;
+			int inhalt= mem.readFileValue((opCode&127)) + 1;
+			
+			if (inhalt> 0xFF) {
+				inhalt=0; 
+				mem.setZeroFlag();
+			}else{
+				mem.deleteZeroFlag();
+			}
+			
+			if (tmp > 128) {
+				mem.writeFileValue((opCode&127), inhalt);
+			}else {
+				akku.setAkku(inhalt);
+			}
+			
+			
+		}
 	
 	}
