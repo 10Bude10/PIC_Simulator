@@ -29,4 +29,8 @@ public class Akku {
 		}
 	}
 	
+	public void writeToMem(int adr){
+		memory.writeFileValue(adr, bits);
+	}
+	
 }
