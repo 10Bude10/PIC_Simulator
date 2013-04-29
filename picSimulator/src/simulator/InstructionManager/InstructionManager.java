@@ -22,8 +22,6 @@
 			for (i=0; i< befehlTree.size(); i++){
 				befehlTree.get(i);
 				findeBefehl(befehlTree.get(i).getCode());
-				
-				System.out.println(i);
 			}
 		}
 		
