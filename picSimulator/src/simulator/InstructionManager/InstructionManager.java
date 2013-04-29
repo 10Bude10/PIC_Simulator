@@ -203,6 +203,9 @@ import simulator.memory.DataMemory;
 		}
 		
 		private void incf(){
+			
+			System.out.println(mem.readFileValue((opCode&127)));
+			
 			int tmp = opCode;
 			int inhalt= mem.readFileValue((opCode&127)) + 1;
 			
@@ -219,6 +222,7 @@ import simulator.memory.DataMemory;
 				akku.setAkku(inhalt);
 			}
 			
+			System.out.println(mem.readFileValue((tmp&127)));
 			
 		}
 	
