@@ -56,8 +56,8 @@ public class Canvas extends JFrame {
 		getContentPane().setLayout(gridBagLayout);
 		
 
-		ImageButton insert = new ImageButton("insertCode.png", "insertCodeMO.png", 60, 60);
-		add(insert);
+	//	ImageButton insert = new ImageButton("insertCode.png", "insertCodeMO.png", 60, 60);
+	//	add(insert);
 		
 		
 		GridBagConstraints gbc_insertBtn = new GridBagConstraints();
@@ -67,7 +67,7 @@ public class Canvas extends JFrame {
 		gbc_insertBtn.fill = GridBagConstraints.BOTH;
 		gbc_insertBtn.gridx = 0;
 		gbc_insertBtn.gridy = 0;
-		getContentPane().add(insert, gbc_insertBtn);
+//		getContentPane().add(insert, gbc_insertBtn);
 	
 //		JLayeredPane layerPane = new JLayeredPane();
 			JPanel backgroundMenu = new JPanel();

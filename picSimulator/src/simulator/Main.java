@@ -21,7 +21,7 @@ public class Main {
 
 	public static void main(String[] args){
 
-		Canvas  ui = new Canvas();
+		GUI  ui = new GUI();
 		InstructionManager befehl= new InstructionManager();
 		
 		DateiEinlesen datei= new DateiEinlesen();
