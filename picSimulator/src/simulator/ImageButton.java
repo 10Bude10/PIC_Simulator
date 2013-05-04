@@ -1,55 +1,53 @@
 package simulator;
 
+import java.awt.Dimension;
 import java.awt.Image;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
-public class ImageButton extends AbstractButton {
+public class ImageButton extends JButton {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int width = 50;
-	private int height = 50;
+	private int width = 60;
+	private int height = 60;
 	private String path = "./resources/";
 
 	/*
 	 * Customized Icon with new functions
 	 */
-	public ImageButton(String imagePath, String imageMOPath, String tooltip) {
-		Image ImageNormal = getToolkit().getImage(path + imagePath).getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		Image ImageMouseOver = getToolkit().getImage(path + imageMOPath).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+	public ImageButton(String imagePath, String imageMouseOverPath, String imagePressedPath, String tooltip) {
+		ImageIcon iconNormal = new ImageIcon(getToolkit().getImage(path + imagePath).getScaledInstance(width, height, Image.SCALE_SMOOTH));
+		ImageIcon iconMouseOver = new ImageIcon(getToolkit().getImage(path + imageMouseOverPath).getScaledInstance(width, height, Image.SCALE_SMOOTH));
+		ImageIcon iconPressed = new ImageIcon(getToolkit().getImage(path + imagePressedPath).getScaledInstance(width, height, Image.SCALE_SMOOTH));
 		
-		ImageIcon iconNormal = new ImageIcon(ImageNormal);
-		ImageIcon IconMouseOver = new ImageIcon(ImageMouseOver);
-		setIcon(iconNormal);
-		setRolloverIcon(IconMouseOver);
-		setText(tooltip);
+		// Button settings
+		setPreferredSize(new Dimension(width, height));
+		setSize(width, height);
+		setBorder(null);
+		setContentAreaFilled(false);
+		setOpaque(false);
+		setFocusPainted(false);
+		setVisible(true);
 		
-		/*		try {
-			img = ImageIO.read(ClassLoader.getSystemResource(imagePath));
-			imgMO = ImageIO.read(ClassLoader.getSystemResource(imageMOPath));
-		} catch (Exception e) {
-			e.getMessage();
+		if( imageMouseOverPath != null ) {
+			setIcon(iconNormal);
+		} else {
+			setText("No Image");
 		}
-				if ((img != null) && (imgMO != null)) {
-			this.setPreferredSize(new Dimension(width, height));
-			scaledImg = img
-					.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-			scaledImgMO = imgMO.getScaledInstance(width, height,
-					Image.SCALE_SMOOTH);
-			Graphics g = img.getGraphics();
-			g.drawImage(scaledImg, 0, 0, width, height, null);
+		if( imageMouseOverPath != null ) {
+			setRolloverIcon(iconMouseOver);
 		}
-	}
-
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		if (true) {
-			g.drawImage(scaledImg, 0, 0, width, height, null);
+		if( imagePressedPath != null ) {
+			setPressedIcon(iconPressed);
 		}
-*/	} 
+		if( tooltip != null ) {
+			setToolTipText(tooltip);
+		}
+	} 
 
 }
