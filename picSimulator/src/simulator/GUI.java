@@ -21,12 +21,13 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 public class GUI extends JFrame {
-	// Angabe für LEDs
+	
 	public boolean arrayLED[] = new boolean[8];
 	private JTable table;
 	
 	public GUI() {
 		super("pic Simulator");
+		setSize(1200, 800);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -55,7 +56,7 @@ public class GUI extends JFrame {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(BoxSchalter, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(BoxLED, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE))
+							.addComponent(BoxLED, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
 						.addComponent(table, GroupLayout.PREFERRED_SIZE, 573, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 				.addComponent(Menu, GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
@@ -71,15 +72,41 @@ public class GUI extends JFrame {
 							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(BoxSchalter, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
-								.addComponent(BoxLED, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(BoxLED, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(textPane, GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE))
 					.addGap(101))
 		);
 		
 		
-	//	BoxLED.add(new LEDArray(9, 16, 16));
+		// LED-Array
+		LED led1 = new LED();
+		LED led2 = new LED();
+		LED led3 = new LED();
+		LED led4 = new LED();
+		LED led5 = new LED();
+		LED led6 = new LED();
+		LED led7 = new LED();
+		LED led8 = new LED();
+		LED led9 = new LED();
+		BoxLED.add(led1);
+		BoxLED.add(led2);
+		BoxLED.add(led3);
+		BoxLED.add(led4);
+		BoxLED.add(led5);
+		BoxLED.add(led6);
+		BoxLED.add(led7);
+		BoxLED.add(led8);
+		BoxLED.add(led9);
+		
+		
+		led2.turnON();
+		led8.turnON();
+		led9.turnON();
+		
+		
 
-		String off = "./resources/LEDoff.png";
+
+/*		String off = "./resources/LEDoff.png";
 		String on = "./resources/LEDon.png";
 	
 		JLabel L1;
@@ -182,7 +209,7 @@ public class GUI extends JFrame {
 		L9.setPreferredSize(new Dimension(16, 16));
 		L9.setMinimumSize(new Dimension(16, 16));
 		L9.setMaximumSize(new Dimension(16, 16));
-		
+		*/
 		GridBagLayout gbl_BoxSchalter = new GridBagLayout();
 		gbl_BoxSchalter.columnWidths = new int[]{89, 0};
 		gbl_BoxSchalter.rowHeights = new int[] {0, 0, 0, 0, 0, 0};
@@ -230,6 +257,7 @@ public class GUI extends JFrame {
 		gbc_S5.gridy = 4;
 		BoxSchalter.add(S5, gbc_S5);
 		getContentPane().setLayout(groupLayout);
+		
 		
 	}
 }
