@@ -13,6 +13,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,10 +21,15 @@ import javax.swing.JTable;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FileChooserUI;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -97,10 +103,29 @@ public class GUI extends JFrame {
 		);
 		Menu.setLayout(null);
 		
-		ImageButton insert = new ImageButton("insertCode.png","insertCodeMO.png", "insertCodePressed", "Insert the Code");
+		ImageButton insert = new ImageButton("insertCode.png","insertCodeMO.png", "insertCodePressed.png", "Insert the Code");
 		insert.setLocation(12, 13);
+		insert.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.showOpenDialog(null);
+			}
+		});
 		Menu.add(insert);
-		ImageButton settings = new ImageButton("settings.png","settingsMO.png", "settingsPressed", "Settings");
+		ImageButton settings = new ImageButton("settings.png","settingsMO.png", "settingsPressed.png", "Settings");
 		settings.setLocation(100, 13);
 		Menu.add(settings);
 		

@@ -21,6 +21,7 @@ public class ImageButton extends JButton {
 	 * Customized Icon with new functions
 	 */
 	public ImageButton(String imagePath, String imageMouseOverPath, String imagePressedPath, String tooltip) {
+		
 		ImageIcon iconNormal = new ImageIcon(getToolkit().getImage(path + imagePath).getScaledInstance(width, height, Image.SCALE_SMOOTH));
 		ImageIcon iconMouseOver = new ImageIcon(getToolkit().getImage(path + imageMouseOverPath).getScaledInstance(width, height, Image.SCALE_SMOOTH));
 		ImageIcon iconPressed = new ImageIcon(getToolkit().getImage(path + imagePressedPath).getScaledInstance(width, height, Image.SCALE_SMOOTH));
@@ -43,6 +44,7 @@ public class ImageButton extends JButton {
 			setRolloverIcon(iconMouseOver);
 		}
 		if( imagePressedPath != null ) {
+			setSelectedIcon(iconPressed);
 			setPressedIcon(iconPressed);
 		}
 		if( tooltip != null ) {
